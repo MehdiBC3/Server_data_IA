@@ -41,21 +41,18 @@ def login():
     return f'Nom : {nom} / Mot de passe : {motdepasse}'
 
 
-# solution alternative
+@app.route('/add_book', methods=["POST"])
+def addBook():
+    titre = request.form.get('title')
+    auteur = request.form.get('author')
+    annee = request.form.get('year')
 
-# @app.route('/books', methods=["GET"])
-# def books_route():
-#     query = request.args.get('query', '').lower()  # Récupérer la recherche en minuscule
-#     # Rechercher les livres où l'auteur correspond à la requête
-#     matching_books = [book for book in books if query in book['author'].lower()]
-    
-#     # Retourner un message ou les livres trouvés
-#     if matching_books:
-#         result = '<br>'.join([f"{book['title']} - {book['author']} ({book['year']})" for book in matching_books])
-#     else:
-#         result = f"Aucun livre trouvé pour l'auteur : {query}"
-    
-#     return result
+    books.append(
+        {"id": len(books) +1, "title" : titre, 'author' : auteur, "year" : annee}
+        )
+
+    return f'titre: {titre} | auteur : {auteur} | annee : {annee}'
+
 
 
 if __name__ == '__main__':
